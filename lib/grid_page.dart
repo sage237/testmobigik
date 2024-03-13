@@ -122,7 +122,7 @@ class _GridPageState extends State<GridPage> {
       }
     } catch (e) {}
 
-    //Search Diagonally
+    //Search Diagonally Upwards
     try {
       for (int i = searchString.length - 1; i < rows; i++) {
         for (int j = 0; j <= columns - searchString.length; j++) {
@@ -140,6 +140,24 @@ class _GridPageState extends State<GridPage> {
     } catch (e) {
       print('d $e');
     }
+
+    // Search diagonally downwards
+       try {
+      for (int i = 0; i <= rows - searchString.length; i++) {
+        for (int j = 0; j <= columns - searchString.length; j++) {
+          String diagonalWord = '';List<int> diagInts = [];
+          for (int k = 0; k < searchString.length; k++) {
+            diagonalWord += items[(i + k) * columns + j + k];
+            diagInts.add((i + k) * columns + j + k);
+          }
+          if (diagonalWord == searchString) {
+            highlightedIndex.addAll(diagInts);
+          }
+        }
+      }
+    }catch(e){
+      print('EDD $e');
+       }
     setState(() {});
   }
 }
